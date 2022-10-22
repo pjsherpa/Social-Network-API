@@ -52,7 +52,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   //update user by id
-  updateUser(re, res) {
+  updateUser(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
       { $set: req.body },
@@ -67,7 +67,7 @@ module.exports = {
   },
   //delete user by id
   deleteUser(req, res) {
-    User.findOneandRemove({ _id: req.params.userId })
+    User.findOneAndRemove({ _id: req.params.userId })
       .then((student) =>
         !student
           ? res.status(404).json({ message: "no such user exists" })
