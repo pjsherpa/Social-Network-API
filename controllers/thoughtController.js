@@ -3,7 +3,7 @@ const { findOneAndUpdate } = require("../models/Thought");
 
 module.exports = {
   //Get Thoughts
-  getThoughs(req, res) {
+  getThoughts(req, res) {
     Thoughts.find()
       .then((thoughts) => res.json(thoughts))
       .catch((err) => res.status(500).json(err));
