@@ -1,6 +1,5 @@
 const router = require("express").Router();
 
-const { get } = require("mongoose");
 const {
   getThoughts,
   getSingleThought,

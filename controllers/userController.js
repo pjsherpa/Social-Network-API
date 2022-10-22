@@ -1,6 +1,5 @@
 const { ObjectId } = require("mongoose").Types;
 const { User, Thought } = require("../models");
-const { findOneAndUpdate } = require("../models/Thought");
 
 const friendsLink = async (userId) =>
   User.aggregate([
@@ -27,7 +26,7 @@ module.exports = {
   },
   //Get One User with id and get his thoughts and friends data
   getSingleUser(req, res) {
-    User.findOne({ _id: req.params.studentId })
+    User.findOne({ _id: req.params.userId })
       .select("-__v")
       .then(async (user) =>
         !user
@@ -58,8 +57,8 @@ module.exports = {
       { $set: req.body },
       { runValidators: true, new: true }
     )
-      .then((course) =>
-        !course
+      .then((user) =>
+        !user
           ? res.status(404).json({ message: "No user with this id!" })
           : res.json(user)
       )
@@ -68,17 +67,17 @@ module.exports = {
   //delete user by id
   deleteUser(req, res) {
     User.findOneAndRemove({ _id: req.params.userId })
-      .then((student) =>
-        !student
+      .then((user) =>
+        !user
           ? res.status(404).json({ message: "no such user exists" })
-          : User.findOneAndUpdate(
+          : Thought.findOneAndUpdate(
               { users: req.params.userId },
               { $pull: { users: req.params.userId } },
               { new: true }
             )
       )
-      .then((course) =>
-        !course
+      .then((user) =>
+        !user
           ? res.status(404).json({
               message: "User deleted but no thoughts found",
             })

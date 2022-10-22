@@ -1,5 +1,4 @@
 const { User, Thought } = require("../models");
-const { findOneAndUpdate } = require("../models/Thought");
 
 module.exports = {
   //Get Thoughts
@@ -12,8 +11,8 @@ module.exports = {
   getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughId })
       .select("-__v")
-      .then((course) =>
-        !course
+      .then((thought) =>
+        !thought
           ? res.status(404).json({ message: "No thought on this id" })
           : res.json(thought)
       )
@@ -45,8 +44,8 @@ module.exports = {
               { new: true }
             )
       )
-      .then((course) =>
-        !course
+      .then((thought) =>
+        !thought
           ? res.status(404).json({
               message: "thought deleted but no user found",
             })
