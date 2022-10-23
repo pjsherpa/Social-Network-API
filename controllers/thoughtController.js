@@ -3,13 +3,16 @@ const { User, Thought } = require("../models");
 module.exports = {
   //Get Thoughts
   getThoughts(req, res) {
-    Thoughts.find()
+    Thought.find({})
+      .populate({ path: "reactions", select: "-__v" })
+      .select("-__v")
       .then((thoughts) => res.json(thoughts))
       .catch((err) => res.status(500).json(err));
   },
   //get a thought
   getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughId })
+      .populate({ path: "reactions", select: "-__v" })
       .select("-__v")
       .then((thought) =>
         !thought
@@ -31,6 +34,11 @@ module.exports = {
       { _id: req.params.userId },
       { $set: req.body },
       { runValidators: true, new: true }
+        .populate({
+          path: "reactions",
+          select: "-__v",
+        })
+        .select("-___v")
     ).catch((err) => res.status(500).json(err));
   },
   deleteThought(req, res) {

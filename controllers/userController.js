@@ -1,18 +1,12 @@
-const { ObjectId } = require("mongoose").Types;
 const { User, Thought } = require("../models");
-
-const friendsLink = async (userId) =>
-  User.aggregate([
-    { $match: { _id: ObjectId(userId) } },
-    {
-      $unwind: "$reactions",
-    },
-  ]);
 
 module.exports = {
   getUser(req, res) {
     //Get Users
-    User.find()
+    User.find({})
+      .populate({ path: "thought", select: "-__v" })
+      .populate({ path: "friends", select: "-__v" })
+      .select("-__v")
       .then(async (users) => {
         const userObj = {
           users,
@@ -27,15 +21,14 @@ module.exports = {
   //Get One User with id and get his thoughts and friends data
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
+      .populate({ path: "thought", select: "-__v" })
+      .populate({ path: "friends", select: "-__v" })
       .select("-__v")
       .then(async (user) =>
         !user
           ? res.status(404).json({ message: "No user with that ID" })
           : res.json({
               user,
-              thought,
-              //friend count here?
-              //friend data?
             })
       )
       .catch((err) => {
