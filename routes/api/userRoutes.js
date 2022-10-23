@@ -3,8 +3,8 @@ const {
   getUser,
   getSingleUser,
   createUser,
-  deleteUser,
   updateUser,
+  deleteUser,
 } = require("../../controllers/userController");
 
 //api/users

@@ -27,7 +27,7 @@ module.exports = {
       });
   },
   updateThought(req, res) {
-    Thought.findOneAndUpdate(
+    User.findOneAndUpdate(
       { _id: req.params.userId },
       { $set: req.body },
       { runValidators: true, new: true }
