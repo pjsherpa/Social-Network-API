@@ -3,15 +3,12 @@ const { User, Thought } = require("../models");
 module.exports = {
   getUser(req, res) {
     //Get Users
-    User.find({})
-      .populate({ path: "thought", select: "-__v" })
-      .populate({ path: "friends", select: "-__v" })
+    User.find()
+      // .populate({ path: "thought", select: "-__v" })
+      // .populate({ path: "friends", select: "-__v" })
       .select("-__v")
-      .then(async (users) => {
-        const userObj = {
-          users,
-        };
-        return res.json(userObj);
+      .then((dbUserData) => {
+        res.json(dbUserData);
       })
       .catch((err) => {
         console.log(err);
