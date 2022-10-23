@@ -35,8 +35,8 @@ module.exports = {
   },
 
   //Create New user
-  createUser(req, res) {
-    User.create(req.body)
+  createUser({ body }, res) {
+    User.create(body)
       .then((user) => res.json(user))
       .catch((err) => res.status(500).json(err));
   },
