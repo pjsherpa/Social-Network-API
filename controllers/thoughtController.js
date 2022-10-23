@@ -3,8 +3,8 @@ const { User, Thought } = require("../models");
 module.exports = {
   //Get Thoughts
   getThoughts(req, res) {
-    Thought.find({})
-      .populate({ path: "reactions", select: "-__v" })
+    Thought.find()
+      // .populate({ path: "reactions", select: "-__v" })
       .select("-__v")
       .then((thoughts) => res.json(thoughts))
       .catch((err) => res.status(500).json(err));
@@ -12,7 +12,7 @@ module.exports = {
   //get a thought
   getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughId })
-      .populate({ path: "reactions", select: "-__v" })
+      // .populate({ path: "reactions", select: "-__v" })
       .select("-__v")
       .then((thought) =>
         !thought
@@ -29,6 +29,7 @@ module.exports = {
         return res.status(500).json(err);
       });
   },
+
   updateThought(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },

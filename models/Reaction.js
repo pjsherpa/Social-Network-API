@@ -14,7 +14,6 @@ const reactionSchema = new Schema(
     username: {
       type: String,
       required: true,
-      //is this where we do the friend count?
     },
     createdAt: {
       type: Date,

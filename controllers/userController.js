@@ -4,8 +4,6 @@ module.exports = {
   getUser(req, res) {
     //Get Users
     User.find()
-      // .populate({ path: "thought", select: "-__v" })
-      // .populate({ path: "friends", select: "-__v" })
       .select("-__v")
       .then((dbUserData) => {
         res.json(dbUserData);
@@ -18,8 +16,6 @@ module.exports = {
   //Get One User with id and get his thoughts and friends data
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
-      .populate({ path: "thought", select: "-__v" })
-      .populate({ path: "friends", select: "-__v" })
       .select("-__v")
       .then(async (user) =>
         !user
