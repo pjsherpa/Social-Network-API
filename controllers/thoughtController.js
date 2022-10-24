@@ -26,6 +26,7 @@ module.exports = {
       .then((thought) => {
         return User.findOneAndUpdate(
           { _id: req.body.userId },
+
           { $push: { thoughts: thought._id } },
           { new: true }
         );
@@ -37,6 +38,7 @@ module.exports = {
             })
           : res.json(thought);
       })
+
       .catch((err) => {
         console.log(err);
         res.status(500).json(err);
