@@ -75,22 +75,22 @@ module.exports = {
   },
 
   deleteThought(req, res) {
-    Thought.findOneAndRemove({ _id: req.params.userId })
+    Thought.findOneAndRemove({ _id: req.params.thoughtId })
       .then((thought) =>
         !thought
-          ? res.status(400).json({ message: "no such thought exists" })
+          ? res.status(404).json({ message: "no such thought exists" })
           : Thought.findOneAndUpdate(
-              { thoughts: req.params.thoughtId },
-              { $pull: { thoughts: params.thoughtId } },
+              { thought: req.params.thoughtId },
+              { $pull: { thoughts: req.params.thoughtId } },
               { new: true }
             )
       )
       .then((thought) =>
         !thought
           ? res.status(404).json({
-              message: "thought deleted but no user found",
+              message: "thought deleted but no thoughts found",
             })
-          : res.json({ message: "Thought deleted" })
+          : res.json({ message: "thought deleted" })
       )
       .catch((err) => {
         console.log(err);
@@ -102,31 +102,31 @@ module.exports = {
   createReaction({ params, body }, res) {
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
-      { $push: { reactions: body } },
+      { $addToSet: { reactionBody: body.reactionId } },
       { new: true, runValidators: true }
     )
-      .then((thoughtData) => {
-        if (!thoughtData) {
-          res.status(404).json({ message: "Incorrect reaction data!" });
+      .then((thought) => {
+        if (!thought) {
+          res.status(404).json({ message: "No thought with this id" });
           return;
         }
-        res.json(dbPizzaData);
+        res.json(thought);
       })
       .catch((err) => res.json(err));
   },
-  // Delete a reaction
+
+  // delete reaction
   deleteReaction({ params }, res) {
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
-      { $pull: { reactions: { reactionId: params.reactionId } } },
-      { new: true, runValidators: true }
+      { $pull: { reactionBody: body.reactionId } },
+      { new: true }
     )
-      .then((thoughtData) => {
-        if (!thoughtData) {
-          res.status(404).json({ message: "Incorrect reaction data!" });
-          return;
+      .then((thought) => {
+        if (!thought) {
+          return res.status(404).json({ message: "No thought with this id!" });
         }
-        res.json(dbPizzaData);
+        res.json(thought);
       })
       .catch((err) => res.json(err));
   },
