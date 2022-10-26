@@ -4,7 +4,7 @@ module.exports = {
   //Get Thoughts
   getThoughts(req, res) {
     Thought.find()
-      // .populate({ path: "reactions", select: "-__v" })
+      .populate({ path: "reactions", select: "-__v" })
       .select("-__v")
       .then((thoughts) => res.json(thoughts))
       .catch((err) => res.status(500).json(err));
@@ -12,7 +12,7 @@ module.exports = {
   //get a thought
   getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
-      // .populate({ path: "reactions", select: "-__v" })
+      .populate({ path: "reactions", select: "-__v" })
       .select("-__v")
       .then((thought) =>
         !thought
@@ -102,7 +102,7 @@ module.exports = {
   createReaction({ params, body }, res) {
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
-      { $addToSet: { reactionBody: body.reactionId } },
+      { $addToSet: { reactions: body } },
       { new: true, runValidators: true }
     )
       .then((thought) => {
