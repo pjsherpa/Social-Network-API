@@ -6,6 +6,7 @@
   1. [Project Description](#Project-Description)
   2. [Installation](#Installation)
   3. [Contribution Guideline](#Contribution-Guideline)
+  4. [Video Walkthrough](#Video-Walkthrough)
 
 ### Project Description:
 
@@ -21,4 +22,6 @@ The main purpose of this repository is to create a readme file quick and consist
 
 ### Video Walkthrough:
 
-[Pj's Walkthrough Video](https://drive.google.com/file/d/1dMVRPkrJSg313StIXTOYZf7YFHLy5NMX/view)
+[Pj's Walkthrough Video Part 1](https://drive.google.com/file/d/1dMVRPkrJSg313StIXTOYZf7YFHLy5NMX/view)
+[Pj's Walkthrough Video Part 1](https://drive.google.com/file/d/1hld3Zot9YWhMdUtVjQtEL_v6VBJqFzc7/view)
+
