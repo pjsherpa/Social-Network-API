@@ -23,5 +23,5 @@ The main purpose of this repository is to create a readme file quick and consist
 ### Video Walkthrough:
 
 [Pj's Walkthrough Video Part 1](https://drive.google.com/file/d/1dMVRPkrJSg313StIXTOYZf7YFHLy5NMX/view)
-[Pj's Walkthrough Video Part 1](https://drive.google.com/file/d/1hld3Zot9YWhMdUtVjQtEL_v6VBJqFzc7/view)
+[Pj's Walkthrough Video Part 2](https://drive.google.com/file/d/1hld3Zot9YWhMdUtVjQtEL_v6VBJqFzc7/view)
 
